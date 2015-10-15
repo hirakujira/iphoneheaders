@@ -11,7 +11,7 @@
 +(CGSize)size;
 -(id)initWithFrame:(CGRect)frame;
 -(void)dealloc;
--(id)initWithCoder:(id)coder;
+// -(id)initWithCoder:(id)coder;
 -(void)encodeWithCoder:(id)coder;
 -(CGSize)sizeThatFits:(CGSize)fits;
 -(void)setAnimationDuration:(double)duration;

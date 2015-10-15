@@ -17,7 +17,7 @@
 -(id)init;
 -(void)_createLayerWithFrame:(CGRect)frame;
 -(id)initWithFrame:(CGRect)frame;
--(id)initWithCoder:(id)coder;
+// -(id)initWithCoder:(id)coder;
 -(void)encodeWithCoder:(id)coder;
 -(void)dealloc;
 -(void)setCharge:(float)charge;
