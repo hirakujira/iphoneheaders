@@ -14,7 +14,8 @@
 @private
 	NSURL* _url;
 	NSData* _data;
-	CGImageSourceRef _imageSource;
+	// CGImageSourceRef _imageSource; < iOS9
+	CAImageQueueRef _imageSource; // >= iOS9
 }
 // inherited: -(void)dealloc;
 // inherited: -(id)title;
@@ -23,7 +24,8 @@
 -(CGImageRef)createFullScreenCGImageRef:(int*)ref properties:(const CFDictionaryRef*)properties;
 -(CGImageRef)createFullSizeCGImageRef:(int*)ref;
 -(BOOL)hasFullSizeImage;
--(CGImageSourceRef)_imageSource;
+// -(CGImageSourceRef)_imageSource; < iOS 9
+-(CAImageQueueRef)_imageSource; // >= iOS9
 -(id)_data;
 @end
 
