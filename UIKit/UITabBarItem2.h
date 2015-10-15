@@ -11,7 +11,7 @@
 
 @interface UITabBarItem ()
 -(id)init;
--(id)initWithCoder:(id)coder;
+// -(id)initWithCoder:(id)coder;
 -(void)encodeWithCoder:(id)coder;
 -(void)dealloc;
 -(void)setEnabled:(BOOL)enabled;

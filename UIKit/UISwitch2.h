@@ -12,7 +12,7 @@
 @interface UISwitch ()
 -(id)init;
 -(id)initWithFrame:(CGRect)frame;
--(id)initWithCoder:(id)coder;
+// -(id)initWithCoder:(id)coder;
 -(void)_populateArchivedSubviews:(id)subviews;
 -(void)encodeWithCoder:(id)coder;
 -(void)dealloc;

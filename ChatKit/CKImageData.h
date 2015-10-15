@@ -9,7 +9,8 @@
 @class NSData;
 
 @interface CKImageData : NSObject {
-	CGImageSourceRef _imageSource;
+	// CGImageSourceRef _imageSource; < iOS9
+	CAImageQueueRef _imageSource; // >= iOS9
 	NSData* _data;
 }
 @property(readonly, assign, nonatomic) NSData* data;
@@ -24,7 +25,8 @@
 -(int)imageCount;
 -(CGSize)size;
 -(int)imageOrientation;
--(CGImageSourceRef)_imageSource;
+// -(CGImageSourceRef)_imageSource; < iOS 9
+-(CAImageQueueRef)_imageSource; // >= iOS9
 -(id)_newImageWithMaxLength:(int)maxLength transformOrientation:(BOOL)orientation;
 -(CGImageRef)_newCGImageWithMaxLength:(int)maxLength transformOrientation:(BOOL)orientation;
 @end
