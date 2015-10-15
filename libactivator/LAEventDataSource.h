@@ -15,9 +15,14 @@
 - (BOOL)eventWithNameRequiresAssignment:(NSString *)eventName;
 - (BOOL)eventWithName:(NSString *)eventName isCompatibleWithMode:(NSString *)eventMode;
 - (BOOL)eventWithNameSupportsUnlockingDeviceToSend:(NSString *)eventName;
+- (NSString *)assignmentWarningForEventWithName:(NSString *)eventName;
+- (BOOL)eventWithNameIsUnprotected:(NSString *)eventName;
 
 - (BOOL)eventWithNameSupportsRemoval:(NSString *)eventName;
 - (void)removeEventWithName:(NSString *)eventName;
 - (NSString *)configurationViewControllerClassNameForEventWithName:(NSString *)eventName bundle:(NSBundle **)bundle; // LAEventConfigurationViewController
+- (id)configurationForEventWithName:(NSString *)eventName;
+- (void)eventWithName:(NSString *)eventName didSaveNewConfiguration:(id)configuration;
+
 @end
 
