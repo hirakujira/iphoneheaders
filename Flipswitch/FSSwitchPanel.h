@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "FSSwitchState.h"
+#import "FSSwitchSettingsViewController.h"
 
 @interface FSSwitchPanel : NSObject
 
@@ -7,6 +8,9 @@
 
 @property (nonatomic, readonly, copy) NSArray *switchIdentifiers;
 // Returns a list of identifying all switches installed on the device
+
+@property (nonatomic, readonly, copy) NSArray *sortedSwitchIdentifiers;
+// Returns a list of identifying all switches installed on the device sorted by localized title (1.0.3 or later)
 
 - (NSString *)titleForSwitchIdentifier:(NSString *)switchIdentifier;
 // Returns the localized title for a specific switch
@@ -41,6 +45,32 @@
 - (BOOL)switchWithIdentifierIsEnabled:(NSString *)switchIdentifier;
 // Returns YES if the switch is enabled (1.0.1 or later)
 
+- (void)beginPrewarmingForSwitchIdentifier:(NSString *)switchIdentifier;
+// Prepares switch for state changes (1.0.3 or later)
+
+- (void)cancelPrewarmingForSwitchIdentifier:(NSString *)switchIdentifier;
+// Cancels previously requested prewarm (1.0.3 or later)
+
+- (NSString *)descriptionOfState:(FSSwitchState)state forSwitchIdentifier:(NSString *)switchIdentifier;
+// Requests a description of a specific state, in the context of a specific switch identifier (1.0.3 or later)
+
+- (Class <FSSwitchSettingsViewController>)settingsViewControllerClassForSwitchIdentifier:(NSString *)switchIdentifier;
+// Retrieves the settings view controller class for a specific switch identifier (1.0.3 or later)
+
+- (UIViewController <FSSwitchSettingsViewController> *)settingsViewControllerForSwitchIdentifier:(NSString *)switchIdentifier;
+// Retrieves a settings view controller for a specific switch identifier (1.0.3 or later)
+
+- (BOOL)switchWithIdentifierIsSimpleAction:(NSString *)switchIdentifier;
+// Gets whether or not the switch is a simple "button" (1.0.4 or later)
+
+- (UIImage *)imageOfSwitchState:(FSSwitchState)state controlState:(UIControlState)controlState forSwitchIdentifier:(NSString *)switchIdentifier usingLayerSet:(NSString *)layerSet inTemplate:(NSBundle *)templateBundle;
+- (UIImage *)imageOfSwitchState:(FSSwitchState)state controlState:(UIControlState)controlState scale:(CGFloat)scale forSwitchIdentifier:(NSString *)switchIdentifier usingLayerSet:(NSString *)layerSet inTemplate:(NSBundle *)templateBundle;
+// Returns an image representing how a specific switch would look in a particular state when styled with the provided template
+
+- (BOOL)hasCachedImageOfSwitchState:(FSSwitchState)state controlState:(UIControlState)controlState forSwitchIdentifier:(NSString *)switchIdentifier usingLayerSet:(NSString *)layerSet inTemplate:(NSBundle *)templateBundle;
+- (BOOL)hasCachedImageOfSwitchState:(FSSwitchState)state controlState:(UIControlState)controlState scale:(CGFloat)scale forSwitchIdentifier:(NSString *)switchIdentifier usingLayerSet:(NSString *)layerSet inTemplate:(NSBundle *)templateBundle;
+// Returns YES if an image representing the state is loaded
+
 @end
 
 @protocol FSSwitchDataSource;
@@ -60,3 +90,8 @@ extern NSString * const FSSwitchPanelSwitchStateChangedNotification;
 extern NSString * const FSSwitchPanelSwitchIdentifierKey;
 
 extern NSString * const FSSwitchPanelSwitchWillOpenURLNotification;
+
+@interface FSSwitchPanel (LayerEffects)
+- (void)applyEffectsToLayer:(CALayer *)layer forSwitchState:(FSSwitchState)state controlState:(UIControlState)controlState usingTemplate:(NSBundle *)templateBundle;
+- (void)applyEffectsToLayer:(CALayer *)layer forSwitchState:(FSSwitchState)state controlState:(UIControlState)controlState usingLayerSet:(NSString *)layerSet inTemplate:(NSBundle *)templateBundle;
+@end

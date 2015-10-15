@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "FSSwitchState.h"
+#import "FSSwitchSettingsViewController.h"
 
 @protocol FSSwitchDataSource <NSObject>
 @optional
@@ -28,6 +29,10 @@
 // Provide an image descriptor that best displays at the requested size and scale
 // By default looks through the bundle to find a glyph image
 
+- (id)glyphImageDescriptorOfState:(FSSwitchState)switchState variant:(NSString *)variant size:(CGFloat)size scale:(CGFloat)scale forSwitchIdentifier:(NSString *)switchIdentifier;
+// Provide a modern image descriptor that best displays at the requested size and scale (1.0.4)
+// By default looks through the bundle to find a modern glyph image, falling back to using the standard glyph image descriptor
+
 - (NSBundle *)bundleForSwitchIdentifier:(NSString *)switchIdentifier;
 // Provides a bundle to look for localizations/images in
 // By default returns the bundle for the current class
@@ -50,5 +55,20 @@
 // Gets whether or not the switch is enabled
 // Must override if switch can be disabled
 // By default returns YES
+
+- (void)beginPrewarmingForSwitchIdentifier:(NSString *)switchIdentifier;
+// Prepares switch for state changes (1.0.3 or later)
+
+- (void)cancelPrewarmingForSwitchIdentifier:(NSString *)switchIdentifier;
+// Cancels previously requested prewarm (1.0.3 or later)
+
+- (NSString *)descriptionOfState:(FSSwitchState)state forSwitchIdentifier:(NSString *)switchIdentifier;
+// Requests a description of a specific state, in the context of a specific switch identifier (1.0.3 or later)
+
+- (Class <FSSwitchSettingsViewController>)settingsViewControllerClassForSwitchIdentifier:(NSString *)switchIdentifier;
+// Requests the class to handle configuration for the specified switch (1.0.3)
+
+- (BOOL)switchWithIdentifierIsSimpleAction:(NSString *)switchIdentifier;
+// Gets whether or not the switch is a simple "button" (1.0.4)
 
 @end
